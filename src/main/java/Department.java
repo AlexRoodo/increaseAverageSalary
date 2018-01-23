@@ -1,2 +1,35 @@
-public abstract class Department {
+import java.util.ArrayList;
+
+public class Department {
+    private String departmentName;
+    private double averageSalary = 0;
+    ArrayList<Employee> employeesList;
+
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
+        employeesList = new ArrayList<Employee>();
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public double getAverageSalary() {
+        return averageSalary;
+    }
+
+    public void calculateAverageSalary() {
+        int count = 0;
+
+        for (Employee employee : employeesList) {
+            averageSalary += employee.getSalary();
+            count++;
+        }
+
+        averageSalary /= count;
+    }
 }

@@ -1,9 +1,9 @@
 public class Employee {
     private String name;
-    private int salary;
+    private double salary;
     private String department;
 
-    public Employee(String name, int salary, String department) {
+    public Employee(String name, double salary, String department) {
         this.name = name;
         this.salary = salary;
         this.department = department;
@@ -17,7 +17,7 @@ public class Employee {
         this.name = name;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 

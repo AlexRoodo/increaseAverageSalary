@@ -2,37 +2,30 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.*;
-import java.util.Iterator;
+import java.util.LinkedList;
 
 class SourceExcelSheet {
+    private LinkedList<String> departmentsNames = new LinkedList<String>();
+    private LinkedList<Department> departments = new LinkedList<Department>();
 
-    static void readFromExcel(String file) throws IOException{
+    void readFromExcel(String file) throws IOException{
+
         XSSFWorkbook workbook = new XSSFWorkbook(file);
-
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        Iterator<Row> rowIterator = sheet.iterator();
-        while (rowIterator.hasNext()) {
-            Row row = rowIterator.next();
-
-            Iterator<Cell> cellIterator = row.cellIterator();
-            while (cellIterator.hasNext()) {
-                Cell cell = cellIterator.next();
-                switch (cell.getCellTypeEnum()) {
-                    case STRING:
-                        System.out.print(cell.getStringCellValue() + "\t");
-                        break;
-                    case NUMERIC:
-                        System.out.print(cell.getNumericCellValue() + "\t");
-                        break;
-                    case FORMULA:
-                        System.out.print(cell.getNumericCellValue() + "\t");
-                        break;
-                    default :
-                }
+        for (Row row : sheet) {
+            String currentDepartmentName = row.getCell(0).getStringCellValue();
+            String currentEmployeeName = row.getCell(1).getStringCellValue();
+            double currentEmployeeSalary = row.getCell(2).getNumericCellValue();
+            if (!departmentsNames.contains(currentDepartmentName)) {
+                departmentsNames.add(currentDepartmentName);
+                departments.add(new Department(currentDepartmentName));
             }
-
-            System.out.println();
+            departments.getLast().employeesList.add(
+                    new Employee(currentEmployeeName, currentEmployeeSalary, currentDepartmentName));
         }
+
+
+        workbook.close();
     }
 }
