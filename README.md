@@ -1,0 +1,1 @@
+This program can calculate average salary in organisation and then show ways to increase that.
