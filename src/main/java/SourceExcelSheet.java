@@ -2,10 +2,11 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 
 class SourceExcelSheet {
-    private LinkedList<Department> departments = new LinkedList<Department>();
+    LinkedList<Department> departments = new LinkedList<Department>();
 
     private boolean isDepartmentExist (String checkedName) {
         boolean result = false;
@@ -26,7 +27,7 @@ class SourceExcelSheet {
         for (Row row : sheet) {
             String currentDepartmentName = row.getCell(0).getStringCellValue();
             String currentEmployeeName = row.getCell(1).getStringCellValue();
-            double currentEmployeeSalary = row.getCell(2).getNumericCellValue();
+            BigDecimal currentEmployeeSalary = new BigDecimal(row.getCell(2).getNumericCellValue());
 
             if (!isDepartmentExist(currentDepartmentName)) {
                 departments.add(new Department(currentDepartmentName));
@@ -35,10 +36,6 @@ class SourceExcelSheet {
                     new Employee(currentEmployeeName, currentEmployeeSalary, currentDepartmentName));
             departments.getLast().increaseEmployeesAmount();
             departments.getLast().increaseTotalSalary(currentEmployeeSalary);
-        }
-
-        for (Department dpt : departments) {
-            System.out.println(dpt.getDepartmentName());
         }
 
         workbook.close();

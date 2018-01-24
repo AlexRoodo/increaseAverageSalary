@@ -1,10 +1,12 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
-public class Department {
+class Department {
     private String departmentName;
-    private double totalSalary = 0;
-    private int employeesAmount = 0;
-    private double averageSalary = 0;
+    private BigDecimal totalSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
+    private BigDecimal employeesAmount = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
+    private BigDecimal averageSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
     ArrayList<Employee> employeesList;
 
     Department(String departmentName) {
@@ -16,27 +18,28 @@ public class Department {
         return departmentName;
     }
 
-    double getAverageSalary() {
+    BigDecimal getAverageSalary() {
         return averageSalary;
     }
 
-    double getEmployeesAmount() { return employeesAmount; }
+    BigDecimal getEmployeesAmount() {
+        return employeesAmount;
+    }
 
-    void increaseEmployeesAmount() { this.employeesAmount += 1; }
+    void increaseEmployeesAmount() {
+        this.employeesAmount = this.employeesAmount.add(new BigDecimal("1"));
+    }
 
-    double getTotalSalary() { return totalSalary; }
+    BigDecimal getTotalSalary() {
+        return totalSalary;
+    }
 
-    void increaseTotalSalary(double totalSalary) { this.totalSalary += totalSalary; }
+    void increaseTotalSalary(BigDecimal totalSalary) {
+        this.totalSalary = this.totalSalary.add(totalSalary) ;
+    }
 
     void calculateAverageSalary() {
-        int count = 0;
-
-        for (Employee employee : employeesList) {
-            averageSalary += employee.getSalary();
-            count++;
-        }
-
-        averageSalary /= count;
+        averageSalary = totalSalary.divide(employeesAmount, RoundingMode.HALF_UP);
     }
 
 }

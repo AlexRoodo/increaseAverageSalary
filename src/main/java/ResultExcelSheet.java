@@ -9,8 +9,6 @@ class ResultExcelSheet {
     private int i;
 
     void saveResultToFile (String file, LinkedList<Employee> resultTransferCandidatesList) throws IOException{
-        System.out.println("Start writing...");
-
         Workbook book = new XSSFWorkbook();
         Sheet sheet = book.createSheet("Transfer");
 
@@ -20,7 +18,7 @@ class ResultExcelSheet {
             Cell name = row.createCell(0);
             name.setCellValue(currentEmployee.getName());
             Cell salary = row.createCell(1);
-            salary.setCellValue(currentEmployee.getSalary());
+            salary.setCellValue(currentEmployee.getSalary().toString());
             Cell departments = row.createCell(2);
             departments.setCellValue(currentEmployee.targetDepatments.toString());
             i++;

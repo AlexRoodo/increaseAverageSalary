@@ -1,35 +1,24 @@
-public class Employee {
-    private String name;
-    private double salary;
-    private String department;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-    public Employee(String name, double salary, String department) {
+class Employee {
+    private String name;
+    private BigDecimal salary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
+    private String department;
+    StringBuilder targetDepatments = new StringBuilder();
+
+    Employee(String name, BigDecimal salary, String department) {
         this.name = name;
         this.salary = salary;
         this.department = department;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getSalary() {
+    BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 }
