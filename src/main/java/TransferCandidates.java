@@ -25,7 +25,7 @@ class TransferCandidates {
                                 .divide(dprt.getEmployeesAmount().add(new BigDecimal("1")), RoundingMode.HALF_UP);
                 if (dprt.getAverageSalary().compareTo(newAverageSalary) < 0) {
                     System.out.println("Добавление сотрудника " + empl.getName());
-                    empl.targetDepatments.append(dprt.getDepartmentName()).append("\n");
+                    empl.targetDepartments.append(dprt.getDepartmentName()).append("\n");
                     resultTransferCandidatesList.add(empl);
                 }
             }

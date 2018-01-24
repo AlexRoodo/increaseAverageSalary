@@ -20,12 +20,12 @@ class ResultExcelSheet {
             Cell salary = row.createCell(1);
             salary.setCellValue(currentEmployee.getSalary().toString());
             Cell departments = row.createCell(2);
-            departments.setCellValue(currentEmployee.targetDepatments.toString());
+            departments.setCellValue(currentEmployee.targetDepartments.toString());
             i++;
         }
 
 
-        sheet.autoSizeColumn(1);
+        sheet.autoSizeColumn(2);
 
         book.write(new FileOutputStream(file));
         book.close();
