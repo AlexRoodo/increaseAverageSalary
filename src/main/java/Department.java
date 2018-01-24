@@ -2,27 +2,33 @@ import java.util.ArrayList;
 
 public class Department {
     private String departmentName;
+    private double totalSalary = 0;
+    private int employeesAmount = 0;
     private double averageSalary = 0;
     ArrayList<Employee> employeesList;
 
-    public Department(String departmentName) {
+    Department(String departmentName) {
         this.departmentName = departmentName;
         employeesList = new ArrayList<Employee>();
     }
 
-    public String getDepartmentName() {
+    String getDepartmentName() {
         return departmentName;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public double getAverageSalary() {
+    double getAverageSalary() {
         return averageSalary;
     }
 
-    public void calculateAverageSalary() {
+    double getEmployeesAmount() { return employeesAmount; }
+
+    void increaseEmployeesAmount() { this.employeesAmount += 1; }
+
+    double getTotalSalary() { return totalSalary; }
+
+    void increaseTotalSalary(double totalSalary) { this.totalSalary += totalSalary; }
+
+    void calculateAverageSalary() {
         int count = 0;
 
         for (Employee employee : employeesList) {
@@ -32,4 +38,5 @@ public class Department {
 
         averageSalary /= count;
     }
+
 }

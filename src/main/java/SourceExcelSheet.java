@@ -5,8 +5,18 @@ import java.io.*;
 import java.util.LinkedList;
 
 class SourceExcelSheet {
-    private LinkedList<String> departmentsNames = new LinkedList<String>();
     private LinkedList<Department> departments = new LinkedList<Department>();
+
+    private boolean isDepartmentExist (String checkedName) {
+        boolean result = false;
+        if (departments.isEmpty()) return false;
+        for (Department dpt : departments) {
+            if (dpt.getDepartmentName().equalsIgnoreCase(checkedName)) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
     void readFromExcel(String file) throws IOException{
 
@@ -17,14 +27,19 @@ class SourceExcelSheet {
             String currentDepartmentName = row.getCell(0).getStringCellValue();
             String currentEmployeeName = row.getCell(1).getStringCellValue();
             double currentEmployeeSalary = row.getCell(2).getNumericCellValue();
-            if (!departmentsNames.contains(currentDepartmentName)) {
-                departmentsNames.add(currentDepartmentName);
+
+            if (!isDepartmentExist(currentDepartmentName)) {
                 departments.add(new Department(currentDepartmentName));
             }
             departments.getLast().employeesList.add(
                     new Employee(currentEmployeeName, currentEmployeeSalary, currentDepartmentName));
+            departments.getLast().increaseEmployeesAmount();
+            departments.getLast().increaseTotalSalary(currentEmployeeSalary);
         }
 
+        for (Department dpt : departments) {
+            System.out.println(dpt.getDepartmentName());
+        }
 
         workbook.close();
     }
