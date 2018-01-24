@@ -3,8 +3,8 @@ import java.math.RoundingMode;
 import java.util.LinkedList;
 
 class TransferCandidates {
-    private LinkedList<Employee> transferCandidatesList = new LinkedList<Employee>();
-    LinkedList<Employee> resultTransferCandidatesList = new LinkedList<Employee>();
+    private LinkedList<Employee> transferCandidatesList = new LinkedList<>();
+    LinkedList<Employee> resultTransferCandidatesList = new LinkedList<>();
 
     void searchForCandidate (SourceExcelSheet sourceExcelSheet) {
         for (Department dprt : sourceExcelSheet.departments) {

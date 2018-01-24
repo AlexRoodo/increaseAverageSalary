@@ -15,5 +15,4 @@ public class Main {
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         resultExcelSheet.saveResultToFile(resultFilePath, transferCandidates.resultTransferCandidatesList);
     }
-
 }

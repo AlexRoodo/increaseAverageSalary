@@ -40,8 +40,8 @@ class SourceExcelSheet {
             }
         } catch (InvalidOperationException e) {
             System.out.println("Ошибка при чтении файла. Указан неверный путь к исходному файлу!");
-        } catch (IOException e) {
-            System.out.println("Ошибка при вводе данных!");
+        } catch (NullPointerException e) {
+            System.out.println("Ошибка при чтении данных!");
         }
     }
 }

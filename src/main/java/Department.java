@@ -11,7 +11,7 @@ class Department {
 
     Department(String departmentName) {
         this.departmentName = departmentName;
-        employeesList = new ArrayList<Employee>();
+        employeesList = new ArrayList<>();
     }
 
     String getDepartmentName() {
