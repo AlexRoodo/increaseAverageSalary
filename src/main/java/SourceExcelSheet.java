@@ -1,3 +1,4 @@
+import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -6,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 
 class SourceExcelSheet {
-    LinkedList<Department> departments = new LinkedList<Department>();
+    LinkedList<Department> departments = new LinkedList<>();
 
     private boolean isDepartmentExist (String checkedName) {
         boolean result = false;
@@ -19,25 +20,28 @@ class SourceExcelSheet {
         return result;
     }
 
-    void readFromExcel(String file) throws IOException{
+    void readFromExcel(String file) throws InvalidOperationException, IOException {
 
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
-        XSSFSheet sheet = workbook.getSheetAt(0);
+        try(XSSFWorkbook workbook = new XSSFWorkbook(file)) {
+            XSSFSheet sheet = workbook.getSheetAt(0);
 
-        for (Row row : sheet) {
-            String currentDepartmentName = row.getCell(0).getStringCellValue();
-            String currentEmployeeName = row.getCell(1).getStringCellValue();
-            BigDecimal currentEmployeeSalary = new BigDecimal(row.getCell(2).getNumericCellValue());
+            for (Row row : sheet) {
+                String currentDepartmentName = row.getCell(0).getStringCellValue();
+                String currentEmployeeName = row.getCell(1).getStringCellValue();
+                BigDecimal currentEmployeeSalary = new BigDecimal(row.getCell(2).getNumericCellValue());
 
-            if (!isDepartmentExist(currentDepartmentName)) {
-                departments.add(new Department(currentDepartmentName));
+                if (!isDepartmentExist(currentDepartmentName)) {
+                    departments.add(new Department(currentDepartmentName));
+                }
+                departments.getLast().employeesList.add(
+                        new Employee(currentEmployeeName, currentEmployeeSalary));
+                departments.getLast().increaseEmployeesAmount();
+                departments.getLast().increaseTotalSalary(currentEmployeeSalary);
             }
-            departments.getLast().employeesList.add(
-                    new Employee(currentEmployeeName, currentEmployeeSalary, currentDepartmentName));
-            departments.getLast().increaseEmployeesAmount();
-            departments.getLast().increaseTotalSalary(currentEmployeeSalary);
+        } catch (InvalidOperationException e) {
+            System.out.println("Ошибка при чтении файла. Указан неверный путь к исходному файлу!");
+        } catch (IOException e) {
+            System.out.println("Ошибка при вводе данных!");
         }
-
-        workbook.close();
     }
 }
