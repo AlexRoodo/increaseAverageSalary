@@ -26,8 +26,7 @@ class ResultExcelSheet {
                 i++;
             }
 
-
-            sheet.autoSizeColumn(2);
+            sheet.autoSizeColumn(0);
 
             book.write(new FileOutputStream(file));
         } catch (FileNotFoundException e) {
