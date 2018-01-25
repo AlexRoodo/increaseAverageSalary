@@ -10,7 +10,10 @@ class TransferCandidates {
         for (Department dprt : sourceExcelSheet.departments) {
             dprt.calculateAverageSalary();
             for (Employee empl : dprt.employeesList) {
-                if (empl.getSalary().compareTo(dprt.getAverageSalary()) <= 0 ) {
+                BigDecimal newEmployeesAmount = new BigDecimal((dprt.getEmployeesAmount() - 1));
+                BigDecimal newAverageSalary =
+                        (dprt.getTotalSalary().subtract(empl.getSalary())).divide(newEmployeesAmount, RoundingMode.HALF_UP);
+                if (dprt.getAverageSalary().compareTo(newAverageSalary) < 0 ) {
                         transferCandidatesList.add(empl);
                 }
             }
