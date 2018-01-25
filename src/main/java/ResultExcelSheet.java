@@ -22,8 +22,7 @@ class ResultExcelSheet {
                 name.setCellValue(currentEmployee.getName());
                 Cell salary = row.createCell(1);
                 salary.setCellValue(currentEmployee.getSalary().toString());
-                Cell departments = row.createCell(2);
-                departments.setCellValue(currentEmployee.targetDepartments.toString());
+                Cell department = row.createCell(2);
                 i++;
             }
 

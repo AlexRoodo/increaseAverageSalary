@@ -5,12 +5,12 @@ public class Main {
         String sourceFilePath = "C:\\Users\\aturchenkov\\sourceFile.xlsx";
         String resultFilePath = "C:\\Users\\aturchenkov\\resultfile.xlsx";
 
-        SourceExcelSheet sourceExcelSheet = new SourceExcelSheet();
-        sourceExcelSheet.readFromExcel(sourceFilePath);
-
         TransferCandidates transferCandidates = new TransferCandidates();
-        transferCandidates.searchForCandidate(sourceExcelSheet);
-        transferCandidates.filterCandidate(sourceExcelSheet);
+        SourceExcelSheet sourceExcelSheet = new SourceExcelSheet();
+        sourceExcelSheet.readFromExcel(sourceFilePath, transferCandidates.getDepartmentHashMap());
+
+        transferCandidates.searchForCandidate();
+        transferCandidates.filterCandidate();
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         resultExcelSheet.saveResultToFile(resultFilePath, transferCandidates.resultTransferCandidatesList);
