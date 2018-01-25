@@ -20,9 +20,9 @@ class TransferCandidates {
     void filterCandidate (SourceExcelSheet sourceExcelSheet) {
         for (Employee empl : transferCandidatesList) {
             for (Department dprt : sourceExcelSheet.departments) {
+                BigDecimal newEmployeesAmount = new BigDecimal((dprt.getEmployeesAmount() + 1));
                 BigDecimal newAverageSalary =
-                        (dprt.getTotalSalary().add(empl.getSalary()))
-                                .divide(dprt.getEmployeesAmount().add(new BigDecimal("1")), RoundingMode.HALF_UP);
+                        (dprt.getTotalSalary().add(empl.getSalary())).divide(newEmployeesAmount, RoundingMode.HALF_UP);
                 if (dprt.getAverageSalary().compareTo(newAverageSalary) < 0) {
                     System.out.println("Добавление сотрудника " + empl.getName());
                     empl.targetDepartments.append(dprt.getDepartmentName()).append("\n");

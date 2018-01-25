@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Department {
     private String departmentName;
     private BigDecimal totalSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
-    private BigDecimal employeesAmount = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
+    private int employeesAmount = 0;
     private BigDecimal averageSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
     ArrayList<Employee> employeesList;
 
@@ -22,12 +22,12 @@ class Department {
         return averageSalary;
     }
 
-    BigDecimal getEmployeesAmount() {
+    int getEmployeesAmount() {
         return employeesAmount;
     }
 
     void increaseEmployeesAmount() {
-        this.employeesAmount = this.employeesAmount.add(new BigDecimal("1"));
+        this.employeesAmount += 1;
     }
 
     BigDecimal getTotalSalary() {
@@ -39,7 +39,6 @@ class Department {
     }
 
     void calculateAverageSalary() {
-        averageSalary = totalSalary.divide(employeesAmount, RoundingMode.HALF_UP);
+        averageSalary = totalSalary.divide(new BigDecimal(employeesAmount), RoundingMode.HALF_UP);
     }
-
 }
