@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 class ResultExcelSheet {
-    private int i;
 
     void saveResultToFile (String file, LinkedList<Employee> resultTransferCandidatesList)
             throws IOException{
+        int i = 0;
+
         try(Workbook book = new XSSFWorkbook()) {
             Sheet sheet = book.createSheet("Transfer");
 

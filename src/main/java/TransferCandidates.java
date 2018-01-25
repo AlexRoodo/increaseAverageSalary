@@ -8,13 +8,12 @@ class TransferCandidates {
 
     void searchForCandidate (SourceExcelSheet sourceExcelSheet) {
         for (Department dprt : sourceExcelSheet.departments) {
-            dprt.calculateAverageSalary();
-            for (Employee empl : dprt.employeesList) {
-                BigDecimal newEmployeesAmount = new BigDecimal((dprt.getEmployeesAmount() - 1));
-                BigDecimal newAverageSalary =
-                        (dprt.getTotalSalary().subtract(empl.getSalary())).divide(newEmployeesAmount, RoundingMode.HALF_UP);
-                if (dprt.getAverageSalary().compareTo(newAverageSalary) < 0 ) {
-                        transferCandidatesList.add(empl);
+            for (Employee empl : dprt.getEmployeesList()) {
+                if(dprt.getAverageSalary()
+                        .compareTo(dprt.getTotalSalary()
+                                .subtract(empl.getSalary()
+                                        .divide(new BigDecimal(dprt.getEmployeesList().size() - 1), RoundingMode.HALF_UP))) < 0) {
+                    transferCandidatesList.add(empl);
                 }
             }
         }
@@ -23,10 +22,10 @@ class TransferCandidates {
     void filterCandidate (SourceExcelSheet sourceExcelSheet) {
         for (Employee empl : transferCandidatesList) {
             for (Department dprt : sourceExcelSheet.departments) {
-                BigDecimal newEmployeesAmount = new BigDecimal((dprt.getEmployeesAmount() + 1));
-                BigDecimal newAverageSalary =
-                        (dprt.getTotalSalary().add(empl.getSalary())).divide(newEmployeesAmount, RoundingMode.HALF_UP);
-                if (dprt.getAverageSalary().compareTo(newAverageSalary) < 0) {
+                if (dprt.getAverageSalary()
+                        .compareTo((dprt.getTotalSalary()
+                                .add(empl.getSalary()))
+                                .divide(new BigDecimal(dprt.getEmployeesList().size() + 1), RoundingMode.HALF_UP)) < 0) {
                     System.out.println("Добавление сотрудника " + empl.getName());
                     empl.targetDepartments.append(dprt.getDepartmentName()).append("\n");
                     resultTransferCandidatesList.add(empl);

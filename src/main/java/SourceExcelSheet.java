@@ -33,10 +33,8 @@ class SourceExcelSheet {
                 if (!isDepartmentExist(currentDepartmentName)) {
                     departments.add(new Department(currentDepartmentName));
                 }
-                departments.getLast().employeesList.add(
+                departments.getLast().getEmployeesList().add(
                         new Employee(currentEmployeeName, currentEmployeeSalary));
-                departments.getLast().increaseEmployeesAmount();
-                departments.getLast().increaseTotalSalary(currentEmployeeSalary);
             }
         } catch (InvalidOperationException e) {
             System.out.println("Ошибка при чтении файла. Указан неверный путь к исходному файлу!");

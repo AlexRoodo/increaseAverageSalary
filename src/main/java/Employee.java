@@ -11,11 +11,11 @@ class Employee {
         this.salary = salary;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    BigDecimal getSalary() {
+    public BigDecimal getSalary() {
         return salary;
     }
 }

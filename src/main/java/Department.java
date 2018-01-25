@@ -4,41 +4,31 @@ import java.util.ArrayList;
 
 class Department {
     private String departmentName;
-    private BigDecimal totalSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
-    private int employeesAmount = 0;
-    private BigDecimal averageSalary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
-    ArrayList<Employee> employeesList;
+    private ArrayList<Employee> employeesList;
 
-    Department(String departmentName) {
-        this.departmentName = departmentName;
-        employeesList = new ArrayList<>();
-    }
-
-    String getDepartmentName() {
+    public String getDepartmentName() {
         return departmentName;
     }
-
-    BigDecimal getAverageSalary() {
-        return averageSalary;
+    public void setDepartmentName(String s) {
+        this.departmentName = s;
     }
 
-    int getEmployeesAmount() {
-        return employeesAmount;
+    public BigDecimal getAverageSalary() {
+        return getTotalSalary().divide(new BigDecimal(employeesList.size()), RoundingMode.HALF_UP);
     }
 
-    void increaseEmployeesAmount() {
-        this.employeesAmount += 1;
-    }
-
-    BigDecimal getTotalSalary() {
+    public BigDecimal getTotalSalary() {
+        BigDecimal totalSalary = new BigDecimal(0);
+        for (Employee emp : employeesList) {
+            totalSalary = totalSalary.add(emp.getSalary());
+        }
         return totalSalary;
     }
 
-    void increaseTotalSalary(BigDecimal totalSalary) {
-        this.totalSalary = this.totalSalary.add(totalSalary) ;
-    }
-
-    void calculateAverageSalary() {
-        averageSalary = totalSalary.divide(new BigDecimal(employeesAmount), RoundingMode.HALF_UP);
+    public ArrayList<Employee> getEmployeesList() {
+        if (employeesList == null) {
+            employeesList = new ArrayList<>();
+        }
+        return employeesList;
     }
 }
