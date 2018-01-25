@@ -8,11 +8,12 @@ import java.util.HashMap;
 
 class SourceExcelSheet {
 
-    void readFromExcel(String file, HashMap<String, Department> departmentHashMap)
+    public void readFromExcel(String file, HashMap<String, Department> departmentHashMap)
             throws InvalidOperationException, IOException {
 
         try(XSSFWorkbook workbook = new XSSFWorkbook(file)) {
             XSSFSheet sheet = workbook.getSheetAt(0);
+
             for (Row row : sheet) {
                 if(!departmentHashMap.containsKey(row.getCell(0).getStringCellValue())) {
                     departmentHashMap.put(row.getCell(0).getStringCellValue(), new Department());
@@ -25,6 +26,7 @@ class SourceExcelSheet {
             System.out.println("Ошибка при чтении файла. Указан неверный путь к исходному файлу!");
         } catch (NullPointerException e) {
             System.out.println("Ошибка при чтении данных!");
+            System.exit(1);
         }
     }
 }

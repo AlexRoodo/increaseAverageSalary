@@ -7,12 +7,14 @@ public class Main {
 
         TransferCandidates transferCandidates = new TransferCandidates();
         SourceExcelSheet sourceExcelSheet = new SourceExcelSheet();
+        TransferList transferList = new TransferList();
+        ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
+
+
         sourceExcelSheet.readFromExcel(sourceFilePath, transferCandidates.getDepartmentHashMap());
 
-        transferCandidates.searchForCandidate();
-        transferCandidates.filterCandidate();
+        transferCandidates.searchForCandidate(transferList.getTransferList());
 
-        ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
-        resultExcelSheet.saveResultToFile(resultFilePath, transferCandidates.resultTransferCandidatesList);
+        resultExcelSheet.saveResultToFile(resultFilePath, transferList.getTransferList());
     }
 }

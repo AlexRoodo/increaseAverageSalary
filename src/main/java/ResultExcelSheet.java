@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 class ResultExcelSheet {
 
-    void saveResultToFile (String file, LinkedList<Employee> resultTransferCandidatesList)
+    public void saveResultToFile (String file, LinkedList<Employee> resultTransferCandidatesList)
             throws IOException{
         int i = 0;
 
@@ -30,9 +30,10 @@ class ResultExcelSheet {
 
             book.write(new FileOutputStream(file));
         } catch (FileNotFoundException e) {
-            System.out.println("Ошибка при чтении файла. Указан неверный путь к файлу для записи!");
+            System.out.println("Ошибка при записи файла. Указан неверный путь к файлу для записи!");
         } catch (IOException e) {
-            System.out.println("Ошибка при вводе данных!");
+            System.out.println("Ошибка при выводе данных!");
+            System.exit(1);
         }
     }
 }

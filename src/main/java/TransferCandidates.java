@@ -6,9 +6,8 @@ import java.util.LinkedList;
 class TransferCandidates {
     private LinkedList<Employee> transferCandidatesList = new LinkedList<>();
     private HashMap<String, Department> departmentHashMap = null;
-    LinkedList<Employee> resultTransferCandidatesList = new LinkedList<>();
 
-    void searchForCandidate () {
+    public void searchForCandidate (LinkedList<Employee> transferList) {
         for (String s : departmentHashMap.keySet()) {
             Department dpt = departmentHashMap.get(s);
             for (Employee emp : dpt.getEmployeesList()) {
@@ -20,9 +19,7 @@ class TransferCandidates {
                 }
             }
         }
-    }
 
-    void filterCandidate () {
         for (Employee empl : transferCandidatesList) {
             for (String s : departmentHashMap.keySet()) {
                 Department dpt = departmentHashMap.get(s);
@@ -31,10 +28,12 @@ class TransferCandidates {
                                 .add(empl.getSalary()))
                                 .divide(new BigDecimal(dpt.getEmployeesList().size() + 1), RoundingMode.HALF_UP)) < 0) {
                     System.out.println("Добавление сотрудника " + empl.getName());
-                    resultTransferCandidatesList.add(empl);
+                    transferList.add(empl);
                 }
             }
         }
+
+        transferCandidatesList = null;
     }
 
     public HashMap<String, Department> getDepartmentHashMap() {
