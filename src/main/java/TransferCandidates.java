@@ -12,9 +12,10 @@ class TransferCandidates {
             Department dpt = departmentHashMap.get(s);
             for (Employee emp : dpt.getEmployeesList()) {
                 if(dpt.getAverageSalary()
-                        .compareTo(dpt.getTotalSalary()
+                        .compareTo (dpt.getTotalSalary()
                                 .subtract(emp.getSalary())
-                                .divide(new BigDecimal(dpt.getEmployeesList().size() - 1), RoundingMode.HALF_UP)) < 0) {
+                                .divide (new BigDecimal(dpt.getEmployeesList().size() - 1),
+                                        RoundingMode.HALF_UP)) < 0) {
                     transferCandidatesList.add(emp);
                 }
             }
@@ -24,9 +25,10 @@ class TransferCandidates {
             for (String s : departmentHashMap.keySet()) {
                 Department dpt = departmentHashMap.get(s);
                 if (dpt.getAverageSalary()
-                        .compareTo((dpt.getTotalSalary()
+                        .compareTo ((dpt.getTotalSalary()
                                 .add(empl.getSalary()))
-                                .divide(new BigDecimal(dpt.getEmployeesList().size() + 1), RoundingMode.HALF_UP)) < 0) {
+                                .divide (new BigDecimal(dpt.getEmployeesList().size() + 1),
+                                        RoundingMode.HALF_UP)) < 0) {
                     System.out.println("Добавление сотрудника " + empl.getName());
                     transferList.add(empl);
                 }

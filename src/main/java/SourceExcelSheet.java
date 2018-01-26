@@ -19,7 +19,8 @@ class SourceExcelSheet {
                     departmentHashMap.put(row.getCell(0).getStringCellValue(), new Department());
                 }
                 departmentHashMap.get(row.getCell(0).getStringCellValue()).getEmployeesList()
-                        .add(new Employee(row.getCell(1).getStringCellValue(), new BigDecimal(row.getCell(2).getNumericCellValue())));
+                        .add(new Employee(row.getCell(1).getStringCellValue(),
+                                new BigDecimal(row.getCell(2).getNumericCellValue())));
             }
 
         } catch (InvalidOperationException e) {
@@ -28,5 +29,9 @@ class SourceExcelSheet {
             System.out.println("Ошибка при чтении данных!");
             System.exit(1);
         }
+    }
+
+    public void cellsInitCheck () {
+
     }
 }

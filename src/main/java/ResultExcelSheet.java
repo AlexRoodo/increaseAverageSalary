@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 class ResultExcelSheet {
 
-    public void saveResultToFile (String file, LinkedList<Employee> resultTransferCandidatesList)
+    public void writeResultToFile(String file, LinkedList<Employee> resultTransferCandidatesList)
             throws IOException{
         int i = 0;
 
@@ -22,7 +22,6 @@ class ResultExcelSheet {
                 name.setCellValue(currentEmployee.getName());
                 Cell salary = row.createCell(1);
                 salary.setCellValue(currentEmployee.getSalary().toString());
-                Cell department = row.createCell(2);
                 i++;
             }
 
