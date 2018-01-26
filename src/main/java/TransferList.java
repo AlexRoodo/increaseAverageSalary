@@ -19,13 +19,4 @@ public class TransferList {
         this.isTransferListFilled = transferListFilled;
     }
 
-    public void formattedConsoleOutput() {
-        if (!isTransferListFilled) {
-            System.out.println("Отсутствует список кандидатов на перевод.");
-            return;
-        }
-
-
-
-    }
 }

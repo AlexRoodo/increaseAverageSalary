@@ -5,10 +5,6 @@ public class Transfer {
     private Department currentDepartment = null;
     private Department destinationDepartment = null;
 
-    public Transfer (Department currentDepartment) {
-        this.currentDepartment = currentDepartment;
-    }
-
     public LinkedList<Employee> getEmployeesToTransfer() {
         if (employeesToTransfer == null) {
             employeesToTransfer = new LinkedList<>();

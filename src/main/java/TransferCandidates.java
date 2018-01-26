@@ -45,12 +45,4 @@ class TransferCandidates {
         }
         return departmentHashMap;
     }
-
-    public HashMap<Department, Transfer> getTransfersHashMap() {
-        if (departmentHashMap == null) {
-            departmentHashMap = new HashMap<>();
-        }
-        return transfersHashMap;
-    }
-
 }
