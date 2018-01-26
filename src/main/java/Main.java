@@ -23,7 +23,10 @@ public class Main {
             System.exit(1);
         }
 
+        transferCandidates.getDepartmentHashMap();
+
         TransferList transferList = new TransferList();
+
         transferCandidates.searchForCandidate(transferList.getTransferList());
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();

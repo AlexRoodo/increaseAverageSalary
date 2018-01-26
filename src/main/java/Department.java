@@ -3,7 +3,12 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 class Department {
+    private String name = "";
     private ArrayList<Employee> employeesList = null;
+
+    public Department(String name) {
+        this.name = name;
+    }
 
     public BigDecimal getAverageSalary() {
         return getTotalSalary().divide(new BigDecimal(employeesList.size()), RoundingMode.HALF_UP);
@@ -22,5 +27,18 @@ class Department {
             employeesList = new ArrayList<>();
         }
         return employeesList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

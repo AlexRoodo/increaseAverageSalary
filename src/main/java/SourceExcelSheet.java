@@ -18,10 +18,11 @@ class SourceExcelSheet {
                 if (!cellsInitCheck(row)) {
                     break;
                 }
-                if(!departmentHashMap.containsKey(row.getCell(0).getStringCellValue())) {
-                    departmentHashMap.put(row.getCell(0).getStringCellValue(), new Department());
+                String firstCellValue = row.getCell(0).getStringCellValue();
+                if(!departmentHashMap.containsKey(firstCellValue)) {
+                    departmentHashMap.put(firstCellValue, new Department(firstCellValue));
                 }
-                departmentHashMap.get(row.getCell(0).getStringCellValue()).getEmployeesList()
+                departmentHashMap.get(firstCellValue).getEmployeesList()
                         .add(new Employee(row.getCell(1).getStringCellValue(),
                                 new BigDecimal(row.getCell(2).getNumericCellValue())));
             }
