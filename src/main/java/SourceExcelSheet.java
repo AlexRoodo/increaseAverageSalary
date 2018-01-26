@@ -15,6 +15,9 @@ class SourceExcelSheet {
             XSSFSheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
+                if (!cellsInitCheck(row)) {
+                    break;
+                }
                 if(!departmentHashMap.containsKey(row.getCell(0).getStringCellValue())) {
                     departmentHashMap.put(row.getCell(0).getStringCellValue(), new Department());
                 }
@@ -26,12 +29,21 @@ class SourceExcelSheet {
         } catch (InvalidOperationException e) {
             System.out.println("Ошибка при чтении файла. Указан неверный путь к исходному файлу!");
         } catch (NullPointerException e) {
-            System.out.println("Ошибка при чтении данных!");
+            System.out.println("Ошибка при чтении данных! Проверьте заполнение таблицы.");
             System.exit(1);
         }
     }
 
-    public void cellsInitCheck () {
-
+    public boolean cellsInitCheck (Row row) {
+        boolean result = true;
+        for (int i = 0; i < row.getLastCellNum(); i++) {
+            Cell cell = row.getCell(i);
+            if (i == 2 && cell.getNumericCellValue() < 0) {
+                result = false;
+            } else if (i != 2 && cell.getStringCellValue().isEmpty()) {
+                result = false;
+            }
+        }
+        return result;
     }
 }
