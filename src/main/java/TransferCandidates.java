@@ -6,6 +6,7 @@ import java.util.LinkedList;
 class TransferCandidates {
     private LinkedList<Employee> transferCandidatesList = new LinkedList<>();
     private HashMap<String, Department> departmentHashMap = null;
+    private HashMap<Department, Transfer> transfersHashMap = null;
 
     public void searchForCandidate (LinkedList<Employee> transferList) {
         for (String s : departmentHashMap.keySet()) {
@@ -43,6 +44,13 @@ class TransferCandidates {
             departmentHashMap = new HashMap<>();
         }
         return departmentHashMap;
+    }
+
+    public HashMap<Department, Transfer> getTransfersHashMap() {
+        if (departmentHashMap == null) {
+            departmentHashMap = new HashMap<>();
+        }
+        return transfersHashMap;
     }
 
 }

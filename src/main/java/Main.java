@@ -25,10 +25,10 @@ public class Main {
 
         TransferList transferList = new TransferList();
         transferCandidates.searchForCandidate(transferList.getTransferList());
+        transferList.setTransferListFilled(true);
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");
-        System.out.println("Save result to: " + resultDirectoryPath.toString());
         resultExcelSheet.writeResultToFile
                 (resultDirectoryPath.toString(), transferList.getTransferList());
     }
