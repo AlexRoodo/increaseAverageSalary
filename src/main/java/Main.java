@@ -25,13 +25,11 @@ public class Main {
 
         transferCandidates.getDepartmentHashMap();
 
-        TransferList transferList = new TransferList();
-
         transferCandidates.searchForCandidate();
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");
         resultExcelSheet.writeResultToFile
-                (resultDirectoryPath.toString(), transferList.getTransferList());
+                (resultDirectoryPath.toString(), transferCandidates.transferLinkedList);
     }
 }

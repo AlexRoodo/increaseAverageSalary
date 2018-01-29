@@ -4,7 +4,7 @@ import java.util.*;
 
 class TransferCandidates {
     private HashMap<String, Department> departmentHashMap = null;
-    private LinkedList<Transfer> transferLinkedList = null;
+    public LinkedList<Transfer> transferLinkedList = null;
 
     public void searchForCandidate () {
         transferLinkedList = new LinkedList<>();
@@ -88,14 +88,15 @@ class TransferCandidates {
         }
         return (transfer.getCurrentDepartment().getAverageSalary()
                 .compareTo(transfer.getCurrentDepartment().getTotalSalary()
-                .subtract(combinationTotalSalary)
-                        .divide(new BigDecimal(transfer.getCurrentDepartment().getEmployeesList()
-                                .size() - transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0
+                        .subtract(combinationTotalSalary)
+                        .divide(new BigDecimal(
+                        transfer.getCurrentDepartment().getEmployeesList().size() -
+                        transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0
                 && transfer.getTargetDepartment().getAverageSalary()
                 .compareTo(transfer.getCurrentDepartment().getTotalSalary()
                         .add(combinationTotalSalary)
-                        .divide(new BigDecimal(transfer.getCurrentDepartment().getEmployeesList()
-                                .size() + transfer.employeesToTransfer.size()), RoundingMode
-                                .HALF_UP)) < 0);
+                        .divide(new BigDecimal(
+                        transfer.getCurrentDepartment().getEmployeesList().size() +
+                                transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0);
     }
 }
