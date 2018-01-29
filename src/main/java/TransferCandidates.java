@@ -1,16 +1,25 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 class TransferCandidates {
     private HashMap<String, Department> departmentHashMap = null;
     private LinkedList<Transfer> transferLinkedList = null;
 
     public void searchForCandidate (LinkedList<Employee> transferList) {
-        LinkedList<Employee> transferCandidatesList = new LinkedList<>();
-        combinationsSearch();
+        transferLinkedList = new LinkedList<>();
+
+        for (Department currentDepartment : departmentHashMap.values()) {
+            for (Department targetDepartment : departmentHashMap.values()) {
+                if (!currentDepartment.getName().equalsIgnoreCase(targetDepartment.getName())) {
+                    combinationsSearch(currentDepartment, targetDepartment);
+                }
+
+            }
+        }
+        System.out.println(transferLinkedList.size());
+
+/*
         int iter = 0;
 
         for (String s : departmentHashMap.keySet()) {
@@ -40,6 +49,7 @@ class TransferCandidates {
                 }
             }
         }
+*/
     }
 
     public HashMap<String, Department> getDepartmentHashMap() {
@@ -49,19 +59,43 @@ class TransferCandidates {
         return departmentHashMap;
     }
 
-    private void combinationsSearch() {
-        LinkedList<Employee> combination = new LinkedList<>();
-        for (Department currentDepartment : departmentHashMap.values()) {
-            for (int mask = 0; mask < (1 << currentDepartment.getEmployeesList().size()); mask++) {
-                for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
-                    if ((mask & (1 << i)) != 0) {
-                        combination.add(currentDepartment.getEmployeesList().get(i));
-                    }
-                }
+    private void combinationsSearch(Department currentDepartment, Department targetDepartment) {
+        boolean flag = false;
 
+        for (int mask = 0; mask < (1 << currentDepartment.getEmployeesList().size()); mask++) {
+            Transfer transfer = new Transfer();
+            transfer.setCurrentDepartment(currentDepartment);
+            transfer.setDestinationDepartment(targetDepartment);
+
+            for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
+                if ((mask & (1 << i)) != 0) {
+                    transfer.employeesToTransfer.add(currentDepartment.getEmployeesList().get(i));
+                    flag = true;
+                }
+            }
+            if (transfer.employeesToTransfer.size() != currentDepartment.getEmployeesList().size()
+                    && flag && currentDeptFilter(transfer)) {
+                    transferLinkedList.add(transfer);
             }
         }
-        System.out.println(combination.size());
     }
 
+    public boolean currentDeptFilter (Transfer transfer) {
+        BigDecimal combinationTotalSalary = new BigDecimal("0");
+
+        for (Employee employee : transfer.employeesToTransfer) {
+            combinationTotalSalary = combinationTotalSalary.add(employee.getSalary());
+        }
+        return (transfer.getCurrentDepartment().getAverageSalary()
+                .compareTo(transfer.getCurrentDepartment().getTotalSalary()
+                .subtract(combinationTotalSalary)
+                        .divide(new BigDecimal(transfer.getCurrentDepartment().getEmployeesList()
+                                .size() - transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0
+                && transfer.getTargetDepartment().getAverageSalary()
+                .compareTo(transfer.getCurrentDepartment().getTotalSalary()
+                        .add(combinationTotalSalary)
+                        .divide(new BigDecimal(transfer.getCurrentDepartment().getEmployeesList()
+                                .size() + transfer.employeesToTransfer.size()), RoundingMode
+                                .HALF_UP)) < 0);
+    }
 }
