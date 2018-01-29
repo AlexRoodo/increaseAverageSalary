@@ -6,10 +6,11 @@ import java.util.LinkedList;
 
 class TransferCandidates {
     private HashMap<String, Department> departmentHashMap = null;
+    private LinkedList<Transfer> transferLinkedList = null;
 
     public void searchForCandidate (LinkedList<Employee> transferList) {
         LinkedList<Employee> transferCandidatesList = new LinkedList<>();
-        calc();
+        combinationsSearch();
         int iter = 0;
 
         for (String s : departmentHashMap.keySet()) {
@@ -25,7 +26,6 @@ class TransferCandidates {
                 }
             }
         }
-        System.out.println("Совпадений старых " + iter);
 
 
         for (Employee empl : transferCandidatesList) {
@@ -36,7 +36,6 @@ class TransferCandidates {
                                 .add(empl.getSalary()))
                                 .divide (new BigDecimal(dpt.getEmployeesList().size() + 1),
                                         RoundingMode.HALF_UP)) < 0) {
-                    System.out.println("Добавление сотрудника " + empl.getName());
                     transferList.add(empl);
                 }
             }
@@ -50,41 +49,19 @@ class TransferCandidates {
         return departmentHashMap;
     }
 
-    private void calc() {
-        for (Department dpt : departmentHashMap.values()) {
-            int n = dpt.getEmployeesList().size();
-            ArrayList<Employee> arrayList = dpt.getEmployeesList();
-            int iter = 0;
-            // Порядковый номер элемента
-            for (int i = 0; i < n; i ++) {
-                // Количество слагаемых
-                for (int j = 0; j < n; j++) {
-                    int varSal = arrayList.get(i).getSalary().intValueExact();  // Целевая сумма
-                    int quan = 1;                                               // Количество
-                    // Перебор слагаемых
-                    for (int t = i + 1; t < j; t ++) {
-                        varSal += arrayList.get(t).getSalary().intValueExact();
-                        quan++;
+    private void combinationsSearch() {
+        LinkedList<Employee> combination = new LinkedList<>();
+        for (Department currentDepartment : departmentHashMap.values()) {
+            for (int mask = 0; mask < (1 << currentDepartment.getEmployeesList().size()); mask++) {
+                for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
+                    if ((mask & (1 << i)) != 0) {
+                        combination.add(currentDepartment.getEmployeesList().get(i));
                     }
-                    //if (isSatisfies(dpt, varSal, quan)) {
-                        iter++;
-                    //}
                 }
+
             }
-            System.out.println("Совпадений новых " + iter + " " + dpt.getName());
-
         }
-    }
-
-    private boolean isSatisfies (Department dpt, int targSum, int targQuantity) {
-        int avgSal = dpt.getAverageSalary().intValueExact();
-        int totSal = dpt.getTotalSalary().intValueExact();
-        int empNum = dpt.getEmployeesList().size();
-
-        if (avgSal < ((totSal - targSum)/(empNum - targQuantity))) {
-            return true;
-        }
-        return false;
+        System.out.println(combination.size());
     }
 
 }
