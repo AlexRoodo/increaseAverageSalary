@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Transfer {
-    private LinkedList<Employee> employeesToTransfer = null;
+    public LinkedList<Employee> employeesToTransfer = new LinkedList<>();
     private Department currentDepartment = null;
     private Department destinationDepartment = null;
 
@@ -21,7 +21,7 @@ public class Transfer {
         this.currentDepartment = currentDepartment;
     }
 
-    public Department getDestinationDepartment() {
+    public Department getTargetDepartment() {
         return destinationDepartment;
     }
 
@@ -29,9 +29,4 @@ public class Transfer {
         this.destinationDepartment = destinationDepartment;
     }
 
-    public void setEmployeesToTransfer(LinkedList<Employee> employeesToTransfer) {
-        if (this.employeesToTransfer == null) {
-            this.employeesToTransfer = new LinkedList<>(employeesToTransfer);
-        }
-    }
 }

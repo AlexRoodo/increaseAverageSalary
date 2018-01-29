@@ -27,7 +27,7 @@ public class Main {
 
         TransferList transferList = new TransferList();
 
-        transferCandidates.searchForCandidate(transferList.getTransferList());
+        transferCandidates.searchForCandidate();
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");

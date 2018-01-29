@@ -6,7 +6,7 @@ class TransferCandidates {
     private HashMap<String, Department> departmentHashMap = null;
     private LinkedList<Transfer> transferLinkedList = null;
 
-    public void searchForCandidate (LinkedList<Employee> transferList) {
+    public void searchForCandidate () {
         transferLinkedList = new LinkedList<>();
 
         for (Department currentDepartment : departmentHashMap.values()) {
