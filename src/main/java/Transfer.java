@@ -28,7 +28,6 @@ public class Transfer implements Comparable<Transfer>{
         this.targetDepartment = targetDepartment;
     }
 
-
     @Override
     public int compareTo(Transfer o) {
         if (this.currentDepartment.getName().equalsIgnoreCase(o.getCurrentDepartment().getName())) {

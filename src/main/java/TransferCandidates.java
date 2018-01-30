@@ -18,38 +18,6 @@ class TransferCandidates {
             }
         }
         System.out.println(transferLinkedList.size());
-
-/*
-        int iter = 0;
-
-        for (String s : departmentHashMap.keySet()) {
-            Department dpt = departmentHashMap.get(s);
-            for (Employee emp : dpt.getEmployeesList()) {
-                if(dpt.getAverageSalary()
-                        .compareTo (dpt.getTotalSalary()
-                                .subtract(emp.getSalary())
-                                .divide (new BigDecimal(dpt.getEmployeesList().size() - 1),
-                                        RoundingMode.HALF_UP)) < 0) {
-                    iter++;
-                    transferCandidatesList.add(emp);
-                }
-            }
-        }
-
-
-        for (Employee empl : transferCandidatesList) {
-            for (String s : departmentHashMap.keySet()) {
-                Department dpt = departmentHashMap.get(s);
-                if (dpt.getAverageSalary()
-                        .compareTo ((dpt.getTotalSalary()
-                                .add(empl.getSalary()))
-                                .divide (new BigDecimal(dpt.getEmployeesList().size() + 1),
-                                        RoundingMode.HALF_UP)) < 0) {
-                    transferList.add(empl);
-                }
-            }
-        }
-*/
     }
 
     public HashMap<String, Department> getDepartmentHashMap() {
