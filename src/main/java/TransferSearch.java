@@ -2,11 +2,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-class TransferCandidates {
+class TransferSearch {
     private HashMap<String, Department> departmentHashMap = null;
     public LinkedList<Transfer> transferLinkedList = null;
 
-    public void searchForCandidate () {
+    public void searchForTransfers() {
         transferLinkedList = new LinkedList<>();
 
         for (Department currentDepartment : departmentHashMap.values()) {
@@ -17,7 +17,8 @@ class TransferCandidates {
 
             }
         }
-        System.out.println(transferLinkedList.size());
+
+        transferLinkedList.sort(Transfer::compareTo);
     }
 
     public HashMap<String, Department> getDepartmentHashMap() {
@@ -37,21 +38,21 @@ class TransferCandidates {
 
             for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
                 if ((mask & (1 << i)) != 0) {
-                    transfer.employeesToTransfer.add(currentDepartment.getEmployeesList().get(i));
+                    transfer.getEmployeesToTransfer().add(currentDepartment.getEmployeesList().get(i));
                     flag = true;
                 }
             }
-            if (transfer.employeesToTransfer.size() != currentDepartment.getEmployeesList().size()
+            if (transfer.getEmployeesToTransfer().size() != currentDepartment.getEmployeesList().size()
                     && flag && currentDeptFilter(transfer)) {
                     transferLinkedList.add(transfer);
             }
         }
     }
 
-    public boolean currentDeptFilter (Transfer transfer) {
+    private boolean currentDeptFilter (Transfer transfer) {
         BigDecimal combinationTotalSalary = new BigDecimal("0");
 
-        for (Employee employee : transfer.employeesToTransfer) {
+        for (Employee employee : transfer.getEmployeesToTransfer()) {
             combinationTotalSalary = combinationTotalSalary.add(employee.getSalary());
         }
         return (transfer.getCurrentDepartment().getAverageSalary()
@@ -59,12 +60,12 @@ class TransferCandidates {
                         .subtract(combinationTotalSalary)
                         .divide(new BigDecimal(
                         transfer.getCurrentDepartment().getEmployeesList().size() -
-                        transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0
+                        transfer.getEmployeesToTransfer().size()), RoundingMode.HALF_UP)) < 0
                 && transfer.getTargetDepartment().getAverageSalary()
                 .compareTo(transfer.getCurrentDepartment().getTotalSalary()
                         .add(combinationTotalSalary)
                         .divide(new BigDecimal(
                         transfer.getCurrentDepartment().getEmployeesList().size() +
-                                transfer.employeesToTransfer.size()), RoundingMode.HALF_UP)) < 0);
+                                transfer.getEmployeesToTransfer().size()), RoundingMode.HALF_UP)) < 0);
     }
 }

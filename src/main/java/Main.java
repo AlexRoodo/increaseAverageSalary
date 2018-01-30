@@ -11,25 +11,23 @@ public class Main {
             System.exit(1);
         }
 
-        TransferCandidates transferCandidates = new TransferCandidates();
+        TransferSearch transferSearch = new TransferSearch();
 
         Path sourceDirectoryPath = Paths.get(args[0], args[1]);
         if (sourceDirectoryPath.toFile().exists()) {
             SourceExcelSheet sourceExcelSheet = new SourceExcelSheet();
             sourceExcelSheet.readFromExcel
-                    (sourceDirectoryPath.toString(), transferCandidates.getDepartmentHashMap());
+                    (sourceDirectoryPath.toString(), transferSearch.getDepartmentHashMap());
         } else {
             System.out.println("Программе переданы неверные аргументы.");
             System.exit(1);
         }
 
-
-        transferCandidates.searchForCandidate();
-        transferCandidates.transferLinkedList.sort(Transfer::compareTo);
+        transferSearch.searchForTransfers();
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");
         resultExcelSheet.writeResultToFile
-                (resultDirectoryPath.toString(), transferCandidates.transferLinkedList);
+                (resultDirectoryPath.toString(), transferSearch.transferLinkedList);
     }
 }

@@ -1,4 +1,3 @@
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -105,7 +104,7 @@ class ResultExcelSheet {
 
             BigDecimal combinationTotalSalary = new BigDecimal("0");
 
-            for (Employee employee : currentTransfer.employeesToTransfer) {
+            for (Employee employee : currentTransfer.getEmployeesToTransfer()) {
                 combinationTotalSalary = combinationTotalSalary.add(employee.getSalary());
             }
 
@@ -114,7 +113,7 @@ class ResultExcelSheet {
                     .subtract(combinationTotalSalary)
                     .divide(new BigDecimal(
                             currentTransfer.getCurrentDepartment().getEmployeesList().size() -
-                            currentTransfer.employeesToTransfer.size()), RoundingMode
+                            currentTransfer.getEmployeesToTransfer().size()), RoundingMode
                             .HALF_UP).doubleValue());
 
             Row transferTargetResultRow = sheet.createRow(i);
@@ -128,18 +127,12 @@ class ResultExcelSheet {
                     .add(combinationTotalSalary)
                     .divide(new BigDecimal(
                             currentTransfer.getCurrentDepartment().getEmployeesList().size() +
-                            currentTransfer.employeesToTransfer.size()), RoundingMode
+                            currentTransfer.getEmployeesToTransfer().size()), RoundingMode
                             .HALF_UP).doubleValue());
-
-
-
         }
-
 
         sheet.autoSizeColumn(0);
         sheet.autoSizeColumn(1);
         sheet.autoSizeColumn(2);
-
-
     }
 }

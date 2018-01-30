@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 public class Transfer implements Comparable<Transfer>{
-    public LinkedList<Employee> employeesToTransfer = new LinkedList<>();
+    private LinkedList<Employee> employeesToTransfer = new LinkedList<>();
     private Department currentDepartment = null;
     private Department targetDepartment = null;
 
