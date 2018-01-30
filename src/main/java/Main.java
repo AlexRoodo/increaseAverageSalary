@@ -28,6 +28,6 @@ public class Main {
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");
         resultExcelSheet.writeResultToFile
-                (resultDirectoryPath.toString(), transferSearch.transferLinkedList);
+                (resultDirectoryPath.toString(), transferSearch.getTransferLinkedList());
     }
 }

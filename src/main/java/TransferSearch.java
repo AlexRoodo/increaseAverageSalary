@@ -4,10 +4,10 @@ import java.util.*;
 
 class TransferSearch {
     private HashMap<String, Department> departmentHashMap = null;
-    public LinkedList<Transfer> transferLinkedList = null;
+    private LinkedList<Transfer> transferLinkedList = null;
 
     public void searchForTransfers() {
-        transferLinkedList = new LinkedList<>();
+        getTransferLinkedList();
 
         for (Department currentDepartment : departmentHashMap.values()) {
             for (Department targetDepartment : departmentHashMap.values()) {
@@ -26,6 +26,13 @@ class TransferSearch {
             departmentHashMap = new HashMap<>();
         }
         return departmentHashMap;
+    }
+
+    public LinkedList<Transfer> getTransferLinkedList() {
+        if (transferLinkedList == null) {
+            transferLinkedList = new LinkedList<>();
+        }
+        return transferLinkedList;
     }
 
     private void combinationsSearch(Department currentDepartment, Department targetDepartment) {
