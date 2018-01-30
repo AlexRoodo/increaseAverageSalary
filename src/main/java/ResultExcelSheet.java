@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class ResultExcelSheet {
+public class ResultExcelSheet {
 
     public void writeResultToFile(String file, LinkedList<Transfer> transferLinkedList)
             throws IOException{

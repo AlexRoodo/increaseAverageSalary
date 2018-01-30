@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-class Department {
+public class Department {
     private String name = "";
     private ArrayList<Employee> employeesList = null;
 

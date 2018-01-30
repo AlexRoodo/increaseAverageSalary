@@ -1,7 +1,7 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-class Employee implements Comparable<Employee>{
+public class Employee implements Comparable<Employee>{
     private String name;
     private BigDecimal salary = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
 

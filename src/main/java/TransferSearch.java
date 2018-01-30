@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-class TransferSearch {
+public class TransferSearch {
     private HashMap<String, Department> departmentHashMap = null;
     private LinkedList<Transfer> transferLinkedList = null;
 

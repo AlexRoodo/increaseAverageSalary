@@ -6,7 +6,7 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-class SourceExcelSheet {
+public class SourceExcelSheet {
 
     public void readFromExcel(String file, HashMap<String, Department> departmentHashMap)
             throws InvalidOperationException, IOException {
