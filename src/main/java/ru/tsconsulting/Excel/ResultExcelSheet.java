@@ -114,11 +114,8 @@ public class ResultExcelSheet {
             }
 
             Cell currentDepResultCell = transferResultRow.createCell(2);
-            currentDepResultCell.setCellValue(currentTransfer.getCurrentDepartment().getTotalSalary()
-                    .subtract(combinationTotalSalary).divide(new BigDecimal(
-                            currentTransfer.getCurrentDepartment().getEmployeesList().size() -
-                            currentTransfer.getEmployeesToTransfer().size()), RoundingMode
-                            .HALF_UP).doubleValue());
+            currentDepResultCell.setCellValue(currentTransfer.getNewCurrentDepartmentAvgSalary()
+                    .doubleValue());
 
             Row transferTargetResultRow = sheet.createRow(i);
             i++;
@@ -127,11 +124,8 @@ public class ResultExcelSheet {
             targetDepNameCell.setCellValue(targetDepartmentName);
 
             Cell targetDepResultName = transferTargetResultRow.createCell(2);
-            targetDepResultName.setCellValue(currentTransfer.getTargetDepartment().getTotalSalary()
-                    .add(combinationTotalSalary).divide(new BigDecimal(
-                            currentTransfer.getTargetDepartment().getEmployeesList().size() +
-                            currentTransfer.getEmployeesToTransfer().size()), RoundingMode
-                            .HALF_UP).doubleValue());
+            targetDepResultName.setCellValue(currentTransfer.getNewTargetDepartmentAvgSalary()
+                    .doubleValue());
         }
 
         sheet.autoSizeColumn(0);
