@@ -23,9 +23,9 @@ public class Main {
             System.exit(1);
         }
 
-        transferCandidates.getDepartmentHashMap();
 
         transferCandidates.searchForCandidate();
+        transferCandidates.transferLinkedList.sort(Transfer::compareTo);
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
         Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");

@@ -65,7 +65,7 @@ class TransferCandidates {
         for (int mask = 0; mask < (1 << currentDepartment.getEmployeesList().size()); mask++) {
             Transfer transfer = new Transfer();
             transfer.setCurrentDepartment(currentDepartment);
-            transfer.setDestinationDepartment(targetDepartment);
+            transfer.setTargetDepartment(targetDepartment);
 
             for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
                 if ((mask & (1 << i)) != 0) {
