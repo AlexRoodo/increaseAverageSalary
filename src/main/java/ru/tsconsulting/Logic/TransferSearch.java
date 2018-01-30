@@ -1,3 +1,9 @@
+package ru.tsconsulting.Logic;
+
+import ru.tsconsulting.Objects.Department;
+import ru.tsconsulting.Objects.Employee;
+import ru.tsconsulting.Objects.Transfer;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -5,21 +11,6 @@ import java.util.*;
 public class TransferSearch {
     private HashMap<String, Department> departmentHashMap = null;
     private LinkedList<Transfer> transferLinkedList = null;
-
-    public void searchForTransfers() {
-        getTransferLinkedList();
-
-        for (Department currentDepartment : departmentHashMap.values()) {
-            for (Department targetDepartment : departmentHashMap.values()) {
-                if (!currentDepartment.getName().equalsIgnoreCase(targetDepartment.getName())) {
-                    combinationsSearch(currentDepartment, targetDepartment);
-                }
-
-            }
-        }
-
-        transferLinkedList.sort(Transfer::compareTo);
-    }
 
     public HashMap<String, Department> getDepartmentHashMap() {
         if (departmentHashMap == null) {
@@ -33,6 +24,21 @@ public class TransferSearch {
             transferLinkedList = new LinkedList<>();
         }
         return transferLinkedList;
+    }
+
+    public void searchForTransfers() {
+        getTransferLinkedList();
+
+        for (Department currentDepartment : getDepartmentHashMap().values()) {
+            for (Department targetDepartment : getDepartmentHashMap().values()) {
+                if (!currentDepartment.getName().equalsIgnoreCase(targetDepartment.getName())) {
+                    combinationsSearch(currentDepartment, targetDepartment);
+                }
+
+            }
+        }
+
+        getTransferLinkedList().sort(Transfer::compareTo);
     }
 
     private void combinationsSearch(Department currentDepartment, Department targetDepartment) {
@@ -49,9 +55,10 @@ public class TransferSearch {
                     isCombinationFound = true;
                 }
             }
-            if (transfer.getEmployeesToTransfer().size() != currentDepartment.getEmployeesList().size()
+            if (transfer.getEmployeesToTransfer().size() !=
+                    currentDepartment.getEmployeesList().size()
                     && isCombinationFound && transferFilter(transfer)) {
-                    transferLinkedList.add(transfer);
+                    getTransferLinkedList().add(transfer);
             }
         }
     }
@@ -63,16 +70,8 @@ public class TransferSearch {
             combinationTotalSalary = combinationTotalSalary.add(employee.getSalary());
         }
         return (transfer.getCurrentDepartment().getAverageSalary()
-                .compareTo(transfer.getCurrentDepartment().getTotalSalary()
-                        .subtract(combinationTotalSalary)
-                        .divide(new BigDecimal(
-                        transfer.getCurrentDepartment().getEmployeesList().size() -
-                        transfer.getEmployeesToTransfer().size()), RoundingMode.HALF_UP)) < 0
+                .compareTo(transfer.getNewCurrentDepartmentAvgSalary()) < 0
                 && transfer.getTargetDepartment().getAverageSalary()
-                .compareTo(transfer.getCurrentDepartment().getTotalSalary()
-                        .add(combinationTotalSalary)
-                        .divide(new BigDecimal(
-                        transfer.getCurrentDepartment().getEmployeesList().size() +
-                                transfer.getEmployeesToTransfer().size()), RoundingMode.HALF_UP)) < 0);
+                .compareTo(transfer.getNewTargetDepartmentAvgSalary()) < 0);
     }
 }

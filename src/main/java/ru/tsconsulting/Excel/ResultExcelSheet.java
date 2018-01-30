@@ -1,5 +1,8 @@
+package ru.tsconsulting.Excel;
+
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ru.tsconsulting.Objects.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,7 +18,7 @@ public class ResultExcelSheet {
             throws IOException{
 
         try(Workbook book = new XSSFWorkbook()) {
-            Sheet sheet = book.createSheet("Transfer");
+            Sheet sheet = book.createSheet("ru.tsconsulting.Objects.Transfer");
             Iterator<Transfer> iterator = transferLinkedList.listIterator();
 
             writeToRowsAndCells(sheet, iterator);

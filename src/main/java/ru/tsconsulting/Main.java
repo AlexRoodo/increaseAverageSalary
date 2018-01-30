@@ -1,10 +1,15 @@
+package ru.tsconsulting;
+
+import ru.tsconsulting.Excel.*;
+import ru.tsconsulting.Logic.*;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        if (args.length < 2) {
+        if (args.length != 2) {
             System.out.println("Необходимо передать программе 2 аргумента:" + "\n"
                     + "Путь к исходному файлу;\n"
                     + "Имя исходного файла.\n");

@@ -1,3 +1,5 @@
+package ru.tsconsulting.Objects;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
