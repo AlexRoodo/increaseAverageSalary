@@ -36,7 +36,7 @@ public class TransferSearch {
     }
 
     private void combinationsSearch(Department currentDepartment, Department targetDepartment) {
-        boolean flag = false;
+        boolean isCombinationFound = false;
 
         for (int mask = 0; mask < (1 << currentDepartment.getEmployeesList().size()); mask++) {
             Transfer transfer = new Transfer();
@@ -46,17 +46,17 @@ public class TransferSearch {
             for (int i = 0; i < currentDepartment.getEmployeesList().size(); i++) {
                 if ((mask & (1 << i)) != 0) {
                     transfer.getEmployeesToTransfer().add(currentDepartment.getEmployeesList().get(i));
-                    flag = true;
+                    isCombinationFound = true;
                 }
             }
             if (transfer.getEmployeesToTransfer().size() != currentDepartment.getEmployeesList().size()
-                    && flag && currentDeptFilter(transfer)) {
+                    && isCombinationFound && transferFilter(transfer)) {
                     transferLinkedList.add(transfer);
             }
         }
     }
 
-    private boolean currentDeptFilter (Transfer transfer) {
+    private boolean transferFilter(Transfer transfer) {
         BigDecimal combinationTotalSalary = new BigDecimal("0");
 
         for (Employee employee : transfer.getEmployeesToTransfer()) {

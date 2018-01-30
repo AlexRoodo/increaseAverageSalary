@@ -39,37 +39,39 @@ public class ResultExcelSheet {
 
             if (!currentTransfer.getCurrentDepartment().getName()
                     .equalsIgnoreCase(currentDepartmentName)) {
+
                 currentDepartmentName = currentTransfer.getCurrentDepartment().getName();
                 targetDepartmentName = "";
 
-                Row currentDepHeaderRow = sheet.createRow(i);
+                Row currentDepartmentHeaderRow = sheet.createRow(i);
 
-                Cell currentDepMessage = currentDepHeaderRow.createCell(0);
-                currentDepMessage.setCellValue("Список возможных переводов из");
+                Cell currentDepartmentMessage = currentDepartmentHeaderRow.createCell(0);
+                currentDepartmentMessage.setCellValue("Список возможных переводов из");
 
-                Cell currentDepNameCell = currentDepHeaderRow.createCell(1);
-                currentDepNameCell.setCellValue(currentTransfer.getCurrentDepartment().getName());
+                Cell currentDepartmentNameCell = currentDepartmentHeaderRow.createCell(1);
+                currentDepartmentNameCell.setCellValue(currentTransfer.getCurrentDepartment().getName());
 
-                Cell currentDepAvgSalaryCell = currentDepHeaderRow.createCell(2);
-                currentDepAvgSalaryCell.setCellValue(currentTransfer.getCurrentDepartment()
+                Cell currentDepartmentAvgSalaryCell = currentDepartmentHeaderRow.createCell(2);
+                currentDepartmentAvgSalaryCell.setCellValue(currentTransfer.getCurrentDepartment()
                         .getAverageSalary().doubleValue());
                 i++;
             }
 
             if (!currentTransfer.getTargetDepartment().getName()
                     .equalsIgnoreCase(targetDepartmentName)) {
+
                 targetDepartmentName = currentTransfer.getTargetDepartment().getName();
 
-                Row targetDepHeaderRow = sheet.createRow(i);
+                Row targetDepartmentHeaderRow = sheet.createRow(i);
 
-                Cell targetDepMessage = targetDepHeaderRow.createCell(0);
-                targetDepMessage.setCellValue("Возможен перевод в");
+                Cell targetDepartmentMessage = targetDepartmentHeaderRow.createCell(0);
+                targetDepartmentMessage.setCellValue("Возможен перевод в");
 
-                Cell targetDepNameCell = targetDepHeaderRow.createCell(1);
-                targetDepNameCell.setCellValue(currentTransfer.getTargetDepartment().getName());
+                Cell targetDepartmentNameCell = targetDepartmentHeaderRow.createCell(1);
+                targetDepartmentNameCell.setCellValue(currentTransfer.getTargetDepartment().getName());
 
-                Cell targetDepAvgSalaryCell = targetDepHeaderRow.createCell(2);
-                targetDepAvgSalaryCell.setCellValue(currentTransfer.getTargetDepartment()
+                Cell targetDepartmentAvgSalaryCell = targetDepartmentHeaderRow.createCell(2);
+                targetDepartmentAvgSalaryCell.setCellValue(currentTransfer.getTargetDepartment()
                         .getAverageSalary().doubleValue());
                 i++;
                 j = 0;
