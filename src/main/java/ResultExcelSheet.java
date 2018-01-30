@@ -97,7 +97,7 @@ public class ResultExcelSheet {
             i++;
 
             Cell transferResultMessageCell = transferResultRow.createCell(0);
-            transferResultMessageCell.setCellValue("Средняя зарплата изменится ");
+            transferResultMessageCell.setCellValue("Средняя зарплата после перевода ");
 
             Cell currentDepNameCell = transferResultRow.createCell(1);
             currentDepNameCell.setCellValue(currentDepartmentName);
