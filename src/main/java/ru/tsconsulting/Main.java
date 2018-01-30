@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        if (args.length != 2) {
+        if (args.length != 1) {
             System.out.println("Необходимо передать программе 2 аргумента:" + "\n"
                     + "Путь к исходному файлу;\n"
                     + "Имя исходного файла.\n");
@@ -18,7 +18,7 @@ public class Main {
 
         TransferSearch transferSearch = new TransferSearch();
 
-        Path sourceDirectoryPath = Paths.get(args[0], args[1]);
+        Path sourceDirectoryPath = Paths.get(args[0]);
         if (sourceDirectoryPath.toFile().exists()) {
             SourceExcelSheet sourceExcelSheet = new SourceExcelSheet();
             sourceExcelSheet.readFromExcel
@@ -31,8 +31,10 @@ public class Main {
         transferSearch.searchForTransfers();
 
         ResultExcelSheet resultExcelSheet = new ResultExcelSheet();
-        Path resultDirectoryPath = Paths.get(args[0], "Result File.xlsx");
+        Path resultDirectoryPath = Paths.get(sourceDirectoryPath.getParent().toString(), "Result File.xlsx");
         resultExcelSheet.writeResultToFile
                 (resultDirectoryPath.toString(), transferSearch.getTransferLinkedList());
+
+        System.out.println("Файл был сохранен в: " + resultDirectoryPath);
     }
 }
