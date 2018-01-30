@@ -1,11 +1,10 @@
-package ru.tsconsulting.Logic;
+package ru.tsconsulting.increaseAverageSalary.Logic;
 
-import ru.tsconsulting.Objects.Department;
-import ru.tsconsulting.Objects.Employee;
-import ru.tsconsulting.Objects.Transfer;
+import ru.tsconsulting.increaseAverageSalary.Objects.Department;
+import ru.tsconsulting.increaseAverageSalary.Objects.Employee;
+import ru.tsconsulting.increaseAverageSalary.Objects.Transfer;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 
 public class TransferSearch {

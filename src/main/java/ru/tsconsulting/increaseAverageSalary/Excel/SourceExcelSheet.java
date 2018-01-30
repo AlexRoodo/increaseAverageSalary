@@ -1,6 +1,6 @@
-package ru.tsconsulting.Excel;
+package ru.tsconsulting.increaseAverageSalary.Excel;
 
-import ru.tsconsulting.Objects.*;
+import ru.tsconsulting.increaseAverageSalary.Objects.*;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
