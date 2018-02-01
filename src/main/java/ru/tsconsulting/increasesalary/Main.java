@@ -1,7 +1,7 @@
-package ru.tsconsulting.increaseAverageSalary;
+package ru.tsconsulting.increasesalary;
 
-import ru.tsconsulting.increaseAverageSalary.Excel.*;
-import ru.tsconsulting.increaseAverageSalary.Logic.*;
+import ru.tsconsulting.increasesalary.excel.*;
+import ru.tsconsulting.increasesalary.logic.*;
 
 import java.io.IOException;
 import java.nio.file.Path;

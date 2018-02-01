@@ -1,8 +1,8 @@
-package ru.tsconsulting.increaseAverageSalary.Excel;
+package ru.tsconsulting.increasesalary.excel;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import ru.tsconsulting.increaseAverageSalary.Objects.*;
+import ru.tsconsulting.increasesalary.objects.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,7 +17,7 @@ public class ResultExcelSheet {
             throws IOException{
 
         try(Workbook book = new XSSFWorkbook()) {
-            Sheet sheet = book.createSheet("ru.tsconsulting.increaseAverageSalary.Objects.Transfer");
+            Sheet sheet = book.createSheet("ru.tsconsulting.increasesalary.objects.Transfer");
             Iterator<Transfer> iterator = transferLinkedList.listIterator();
 
             writeToRowsAndCells(sheet, iterator);

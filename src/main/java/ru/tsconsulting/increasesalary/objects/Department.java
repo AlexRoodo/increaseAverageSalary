@@ -1,4 +1,4 @@
-package ru.tsconsulting.increaseAverageSalary.Objects;
+package ru.tsconsulting.increasesalary.objects;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

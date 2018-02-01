@@ -1,8 +1,8 @@
-package ru.tsconsulting.increaseAverageSalary.Logic;
+package ru.tsconsulting.increasesalary.logic;
 
-import ru.tsconsulting.increaseAverageSalary.Objects.Department;
-import ru.tsconsulting.increaseAverageSalary.Objects.Employee;
-import ru.tsconsulting.increaseAverageSalary.Objects.Transfer;
+import ru.tsconsulting.increasesalary.objects.Department;
+import ru.tsconsulting.increasesalary.objects.Employee;
+import ru.tsconsulting.increasesalary.objects.Transfer;
 
 import java.math.BigDecimal;
 import java.util.*;
