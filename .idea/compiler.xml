@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="increaseAverageSalary" />
+        <module name="increasesalary" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="increaseAverageSalary" target="1.5" />
+      <module name="increasesalary" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
